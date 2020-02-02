@@ -7,7 +7,7 @@
 
 
 class Solution(object):
-    # 2952 ms  12.6 MB O()
+    # 穷举法
     def twoSum_01(self, nums, target):
         """
         :type nums: List[int]
@@ -20,8 +20,37 @@ class Solution(object):
                 if nums[i] + nums[j] == target:
                     return [i, j]
 
+    # 列表哈希法
+    def twoSum_02(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        hashmap = {}
+        for index, value in enumerate(nums):
+            hashmap[value] = index
+        for index, value in enumerate(nums):
+            if (target - value) in hashmap:
+                j = hashmap[target-value]
+                if j != index:
+                    return [index, j]
+
+    # 列表哈希法
+    def twoSum_03(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        dct = {}
+        for index, value in enumerate(nums):
+            if target - value in dct:
+                return [dct[target - value], index]
+            dct[value] = index
+
 if __name__ == '__main__':
-    nums = [2, 7, 11, 15]
-    target = 9
+    nums = [3, 2, 4, 15]
+    target = 6
     s = Solution()
-    print(s.twoSum_01(nums, target))
+    print(s.twoSum_02(nums, target))
