@@ -1,5 +1,5 @@
 ## 题目地址
-https://leetcode.com/problems/add-two-numbers/description/
+https://leetcode-cn.com/problems/two-sum/
 
 ## 题目描述（中等）
 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
@@ -10,7 +10,6 @@ https://leetcode.com/problems/add-two-numbers/description/
 因为 nums[0] + nums[1] = 2 + 7 = 9
 所以返回 [0, 1]
 ```
-
 
 ## 相关企业(从左到右，按频率排序)
 亚马逊、字节跳动、谷歌、奥多比、阿里巴巴、微软

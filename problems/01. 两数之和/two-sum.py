@@ -2,9 +2,8 @@
 #@Time  :    2020/2/2 20:41
 #@Author:    Shaw
 #@mail  :    shaw@bupt.edu.cn
-#@File  :    Solution.py
-#@Description：LeetCode-01
-
+#@File  :    search-insert-position.py
+#@Description：https://leetcode-cn.com/problems/two-sum/
 
 class Solution(object):
     # 穷举法
