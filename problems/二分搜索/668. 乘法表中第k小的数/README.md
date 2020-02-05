@@ -57,7 +57,8 @@ k 的范围在 [1, m * n] 之间。
 
 现在我们就可以使用二分搜索了，初始化```left = 1， right = n * m + 1，
 mid = （left + right） / 2```，在m，n的乘法表中寻找不超过mid的个数。
---------------------- 
+
+
 作者：hestyle [csdn原文](https://blog.csdn.net/qq_41855420/article/details/89397884) 
 
 很多人担心最终返回的值不在乘法表内，这是不用担心的。
