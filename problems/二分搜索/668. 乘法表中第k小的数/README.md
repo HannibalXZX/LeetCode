@@ -65,6 +65,18 @@ mid = （left + right） / 2```，在m，n的乘法表中寻找不超过mid的�
 
 二分搜索和值其实无关，只是帮你快速地缩小范围。退出while循环时，一定是letft = right。而此时letf和right值相等，就是乘法表中某个具体的值，无论是多少，都能取到的。
 
+比如说，你在```[1,40,100]```中找第二小的数，过程如下：
+1. ```left=1, right=100, mid=50```, 虽然```mid=50```是第二小的数，但是```left<right```，继续循环
+2. ```left=1, right=50, mid=25```, 
+3. ```left=26, right=50, mid=38```, 
+4. ```left=39, right=50 mid=44```, 虽然```mid=44```是第二小的数，但是```left<right```，继续循环
+4. ```left=39, right=44 mid=41```, 虽然```mid=41```是第二小的数，但是```left<right```，继续循环
+5. ```left=39, right=41 mid=40```, 虽然```mid=40```是第二小的数，并且也表中了，但是```left<right```，继续循环
+6. ```left=39, right=40 mid=39```,
+7. ```left=40, right=40 mid=40```,  ```left==right```，此时返回left或者right都可以
+
+可以总结，当你的表比较稀疏时，使用这种二分法，得不偿失。或者说，当你的表中有浮点数时，肯定取不到的。
+
 ## 代码   
 python:
 ```
@@ -112,32 +124,6 @@ python:
 
     # 在m*n乘法表中寻找第k小的数, 二分法
     def findKthNumber(self, m, n, k):
-        """
-        :type m: int
-        :type n: int
-        :type k: int
-        :rtype: int
-        """
-        # 处理边界问题
-        if k == 1:
-            return 1
-        elif k == m*n:
-            return m*n
-        else:
-            left = 1
-            right = m*n
-            while(left < right):
-                mid = int((left + right) >> 1)
-                count_smaller_than_mid = self.count_smaller_than_num(m, n, mid)
-                if count_smaller_than_mid < k:
-                    left = mid + 1
-                else:
-                    right = mid
-
-            return right
-
- # 在m*n乘法表中寻找第k小的数, 二分法
- def findKthNumber(self, m, n, k):
         """
         :type m: int
         :type n: int
