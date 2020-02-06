@@ -35,7 +35,8 @@ https://leetcode-cn.com/problems/search-insert-position/
 查找结束如果没有相等值则返回 left，该值为插入位置
 时间复杂度：O(logn) 
 
-**为避免边界条件出错，直接套用模板**
+* 为避免边界条件出错，直接套用模板
+* left+1,是因为下取整，如果是上取整，则right-1。这样才能保证left = right，跳出循环
 ```java
 class Solution {
     public int searchInsert(int[] nums, int target) {
