@@ -23,7 +23,7 @@ https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 
 ```
 ## 相关企业(从左到右，按频率排序)
-字节跳动、谷歌
+字节跳动、亚马逊、脸书、微软、谷歌
 
 ## 解法
 ### 方法一：比较法
