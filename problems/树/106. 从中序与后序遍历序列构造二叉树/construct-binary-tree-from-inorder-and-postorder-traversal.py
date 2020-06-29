@@ -36,39 +36,70 @@ class Solution():
 
         return root
 
-
-    def buildTree(self, inorder, postorder) -> TreeNode:
+    # 左右子树的顺序都可以
+    def buildTree(self, inorder, postorder):
         print("buildTree()")
-        def helper(in_left, in_right):
+        def helper(inorder, postorder):
             print("helper():")
             # if there is no elements to construct subtrees
-            if in_left > in_right:
+            if not (inorder and postorder):
                 return None
 
-            # pick up the last element as a root
-            val = postorder.pop()
-            root = TreeNode(val)
+            # 找到根的位置
+            root = TreeNode(postorder[-1])
 
-            # root splits inorder list
-            # into left and right subtrees
-            index = idx_map[val]
+            mid = idx_map[root.val]-idx_map[inorder[0]]
+
+            # build left subtree
+            root.left = helper(inorder[:mid], postorder[:mid])
 
             # build right subtree
-            root.right = helper(index + 1, in_right)
-            # build left subtree
-            root.left = helper(in_left, index - 1)
+            root.right = helper(inorder[mid+1:], postorder[mid:-1])
+
             return root
 
         # build a hashmap value -> its index
         idx_map = {val: idx for idx, val in enumerate(inorder)}
 
-        return helper(0, len(inorder) - 1)
+        return helper(inorder, postorder)
+
+
+    # 必须先右子树[官方解法]
+    # def buildTree(self, inorder, postorder) -> TreeNode:
+    #     print("buildTree()")
+    #     def helper(in_left, in_right):
+    #         print("helper():")
+    #         # if there is no elements to construct subtrees
+    #         if in_left > in_right:
+    #             return None
+    #
+    #         # pick up the last element as a root
+    #         val = postorder.pop()
+    #         root = TreeNode(val)
+    #
+    #         # root splits inorder list
+    #         # into left and right subtrees
+    #         index = idx_map[val]
+    #
+    #         # build right subtree
+    #         root.right = helper(index + 1, in_right)
+    #         # build left subtree
+    #         root.left = helper(in_left, index - 1)
+    #         return root
+    #
+    #     # build a hashmap value -> its index
+    #     idx_map = {val: idx for idx, val in enumerate(inorder)}
+    #
+    #     return helper(0, len(inorder) - 1)
 
 
 if __name__ == '__main__':
     s = Solution()
     # 中序遍历
     inorder = [9, 3, 15, 20, 7]
+    # inorder = [2, 3, 1]
     # 后序遍历
+    # postorder = [3, 2, 1]
     postorder = [9, 15, 7, 20, 3]
-    s.buildTree(inorder, postorder)
+    root = s.buildTree(inorder, postorder)
+    print(root)
