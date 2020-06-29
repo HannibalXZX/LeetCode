@@ -2,7 +2,8 @@
 记录刷题历程
 
 ## 刷题流程
-* 在[力扣](https://leetcode-cn.com/problemset/all/)上按标签刷题
+* 在[力扣](https://leetcode-cn.com/problemset/all/)
+
 
 #### 二分搜索
 * [寻找连个有序数组的中位数]()
