@@ -14,22 +14,20 @@ class TreeNode(object):
         self.right = None
 
 
-
 class Solution(object):
 
-    # 构造哈希映射，帮助我们快速定位根节点
-    def get_root_index(self, inorder):
-        index = {element: index for index, element in enumerate(inorder)}
 
-
+    def __init__(self):
+        self.count = 0
 
     # 使用自带的index函数
-    def buildTree_01(self, preorder, inorder):
+    def buildTree_1(self, preorder, inorder):
         """
         :type preorder: List[int]
         :type inorder: List[int]
         :rtype: TreeNode
         """
+        self.count += 1
 
         if not (preorder and inorder):
             return None
@@ -41,10 +39,10 @@ class Solution(object):
         mid = inorder.index(preorder[0])
 
         # 构建左子树
-        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+        root.left = self.buildTree_1(preorder[1:mid+1], inorder[:mid])
 
         # 构建右子树
-        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+        root.right = self.buildTree_1(preorder[mid+1:], inorder[mid+1:])
 
         return root
 
@@ -56,31 +54,39 @@ class Solution(object):
         :type inorder: List[int]
         :rtype: TreeNode
         """
+        # self.count += 1
 
-        if not (preorder and inorder):
-            return None
+        def helper(preorder, inorder):
+            self.count += 1
 
-        # 前序数组的第一个节点为根节点
-        root = TreeNode(preorder[0])
+            if not (preorder and inorder):
+                return None
+            # 前序数组的第一个节点为根节点
+            root = TreeNode(preorder[0])
 
-        # TODO 可以优化，这里有时间复杂度
-        # 没有重复元素，可以直接用index函数找到中序遍历的根的位置
-        mid = inorder.index(preorder[0])
+            # 优化： 使用hash函数替代index函数
+            mid = idx_map[root.val]-idx_map[inorder[0]]
 
-        # 构建左子树
-        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+            # 构建左子树
+            root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
 
-        # 构建右子树
-        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+            # 构建右子树
+            root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
 
-        return root
+            return root
+
+        # 要找中序的根节点位置
+        idx_map = {val: index for index, val in enumerate(inorder)}
+        return helper(preorder, inorder)
 
 
 if __name__ == '__main__':
     s = Solution()
     preorder = [3, 9, 20, 15, 7]
     inorder = [9, 3, 15, 20, 7]
-    s.buildTree(preorder, inorder)
+    root = s.buildTree(preorder, inorder)
+    print(s.count)
+
 
 
 
