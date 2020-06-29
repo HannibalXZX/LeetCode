@@ -54,7 +54,7 @@ class Solution(object):
         :type inorder: List[int]
         :rtype: TreeNode
         """
-        # self.count += 1
+        self.count += 1
 
         def helper(preorder, inorder):
             self.count += 1
@@ -68,14 +68,15 @@ class Solution(object):
             mid = idx_map[root.val]-idx_map[inorder[0]]
 
             # 构建左子树
-            root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+            root.left = helper(preorder[1:mid+1], inorder[:mid])
 
             # 构建右子树
-            root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+            root.right = helper(preorder[mid+1:], inorder[mid+1:])
 
             return root
 
         # 要找中序的根节点位置
+
         idx_map = {val: index for index, val in enumerate(inorder)}
         return helper(preorder, inorder)
 
