@@ -8,42 +8,42 @@
 from typing import List
 class Solution:
     ## 这里用low有问题，逻辑要更复杂，因为
-    def minArray_error(self, numbers: List[int]) -> int:
-        if numbers[0] < numbers[-1]:
-            return numbers[0]
+    def minArray_error(self, nums: List[int]) -> int:
+        if nums[0] < nums[-1]:
+            return nums[0]
         low = 0
-        high = len(numbers)-1
+        high = len(nums)-1
         while(low<high):
             mid = (low + high) // 2
-            if numbers[mid] > numbers[low]:
+            if nums[mid] > nums[low]:
                 low = mid
             # 这里的逻辑其实是错误的，针对1，2，3，4，5
-            elif numbers[mid] < numbers[low]:
+            elif nums[mid] < nums[low]:
                 high = mid
             else:
-                if numbers[low] == numbers[high]:
+                if nums[low] == nums[high]:
                     high -= 1
-                elif numbers[low] > numbers[high]:
+                elif nums[low] > nums[high]:
                     low = mid + 1
                 else:
                     break
-        return numbers[low]
+        return nums[low]
 
-    def minArray(self, numbers: List[int]) -> int:
-        if numbers[0] < numbers[-1]:
-            return numbers[0]
+    def minArray(self, nums: List[int]) -> int:
+        if nums[0] < nums[-1]:
+            return nums[0]
         low = 0
-        high = len(numbers)-1
+        high = len(nums)-1
         while(low<high):
             mid = (low + high) // 2
-            if numbers[mid] > numbers[high]:
+            if nums[mid] > nums[high]:
                 low=mid+1
-            elif numbers[mid] < numbers[high]:
+            elif nums[mid] < nums[high]:
                 high=mid
             else:
                 # 这里很巧妙
                 high -= 1
-        return numbers[low]
+        return nums[low]
 
     def minNumberInRotateArray(self, rotateArray):
         # write code here
