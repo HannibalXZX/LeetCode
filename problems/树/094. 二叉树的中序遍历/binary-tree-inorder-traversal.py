@@ -73,3 +73,24 @@ class Solution:
             else:
                 res.append(node.val)
         return res
+
+
+    # 通用模版【结合三种遍历方式，一起记忆】
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        result = []
+        stack = [root]
+        while stack:
+            p = stack.pop()
+            if p is None:
+                p = stack.pop()
+                result.append(p.val)
+            else:
+                if p.right:
+                    stack.append(p.right)  # 先append的最后访问
+                stack.append(p)
+                stack.append(None)
+                if p.left:
+                    stack.append(p.left)
+        return result
