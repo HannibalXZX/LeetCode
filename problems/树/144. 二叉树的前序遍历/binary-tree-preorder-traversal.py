@@ -48,6 +48,26 @@ class Solution:
                     stack.append(root.left)
         return output
 
+    # 通用模版【记忆】
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        result = []
+        stack = [root]
+        while stack:
+            p = stack.pop()
+            if p is None:
+                p = stack.pop()
+                result.append(p.val)
+            else:
+                if p.right:
+                    stack.append(p.right)  # 先append的最后访问
+                if p.left:
+                    stack.append(p.left)
+                stack.append(p)
+                stack.append(None)
+        return result
+
 
 if __name__ == '__main__':
     s = Solution()
