@@ -76,7 +76,7 @@ class Solution:
 
 
     # 通用模版【结合三种遍历方式，一起记忆】
-    def preorderTraversal(self, root: TreeNode) -> List[int]:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
         if root is None:
             return []
         result = []

@@ -6,13 +6,29 @@
 # @Description：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
 
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution(object):
+
+    ## 递归
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        def helper(root, depth):
+            if not root: return
+            if len(res) == depth:
+                res.append([])
+            res[depth].append(root.val)
+            helper(root.left, depth + 1)
+            helper(root.right, depth + 1)
+
+        helper(root, 0)
+        return res
+
+
     def levelOrder(self, root):
         """
         :type root: TreeNode
@@ -44,4 +60,6 @@ class Solution(object):
                 list_result.append(list_tmp)
 
         return list_result
+
+    ## 模版
 
