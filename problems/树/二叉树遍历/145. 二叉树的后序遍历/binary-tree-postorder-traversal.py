@@ -5,9 +5,9 @@
 #@File  :    binary-tree-postorder-traversal.py
 #@Description：https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
 
-# Definition for a binary tree node.
 from typing import List
 
+# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -18,12 +18,10 @@ class Solution:
     def postorderTraversal(self, root: TreeNode) -> List[int]:
         nums = []
         def postorder(root:TreeNode):
-            if root.left:
-                postorder(root.left)
-            if root.right:
-                postorder(root.right)
             if root:
-               nums.append(root.val)
+                postorder(root.left)
+                postorder(root.right)
+                nums.append(root.val)
             else:
                 return
 
