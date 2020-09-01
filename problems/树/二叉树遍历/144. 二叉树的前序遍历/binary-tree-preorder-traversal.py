@@ -24,12 +24,11 @@ class Solution:
         def preorder(root):
             if root:
                 nums.append(root.val)
-            else:
-                return []
-            if root.left:
                 preorder(root.left)
-            if root.right:
                 preorder(root.right)
+            else:
+                return
+
         preorder(root)
         return nums
 
