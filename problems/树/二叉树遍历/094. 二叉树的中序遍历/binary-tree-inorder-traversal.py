@@ -19,16 +19,13 @@ class Solution:
     def inorderTraversal_01(self, root: TreeNode) -> List[int]:
         nums = []
         def inorder(root:TreeNode):
-            if root.left:
+            if root:
                 inorder(root.left)
-            if root is None:
-                return
-            else:
                 nums.append(root.val)
-            if root.right:
                 inorder(root.right)
-        if root:
-            inorder(root)
+            else:
+                return
+        inorder(root)
         return nums
 
     # 迭代
