@@ -5,6 +5,9 @@
 #@File  :    22.py
 #@Description：
 
+# 礼物兑换
+# 过了20%用例
+
 class Solution:
     def getNumber(self, num):
         if num < 0:
@@ -48,10 +51,6 @@ class Solution:
                 break
 
         return res
-
-    def def():
-        x = min(a, b, c)
-
 
 if __name__ == '__main__':
     s = Solution()
