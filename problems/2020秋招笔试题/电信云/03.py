@@ -5,6 +5,7 @@
 #@Description：
 
 # 排序数组中的不相邻数字之间的最大和
+# AC
 
 def test(nums):
     dp = [0] *len(nums)

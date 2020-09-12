@@ -1,4 +1,5 @@
 # 打印数据
+# AC
 
 for a in range(9):
     for b in range(9):
