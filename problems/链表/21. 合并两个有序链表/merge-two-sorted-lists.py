@@ -13,8 +13,8 @@ class ListNode:
 
 class Solution:
 
+    # 自己的解法，比较复杂
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-
         def find_next_min_node(l1: ListNode, l2: ListNode):
             # 先设立递归终止条件
             if l1 == None:
@@ -28,16 +28,13 @@ class Solution:
             else:
                 minNode = l1
                 l1 = l1.next
-
             minNode.next = find_next_min_node(l1, l2)
-
             return minNode
-
         node = find_next_min_node(l1, l2)
 
         return node
 
-    # 官方解答
+    # 官方解答，递归解法
     def mergeTwoLists(self, l1, l2):
         if l1 is None:
             return l2
@@ -50,11 +47,9 @@ class Solution:
             l2.next = self.mergeTwoLists(l1, l2.next)
             return l2
 
-    # 官方解答
-
+    # 官方解答，迭代解法
     def mergeTwoLists(self, l1, l2):
         prehead = ListNode(-1)
-
         prev = prehead
         while l1 and l2:
             if l1.val <= l2.val:
