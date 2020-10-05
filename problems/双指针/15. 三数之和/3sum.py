@@ -9,6 +9,21 @@ from typing import List
 
 class Solution:
 
+    # 暴力解法
+    def threeSum_0(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+        # 去重
+        no_du_nums = list(set(nums))
+        n = len(no_du_nums)
+        for i in range(n):
+            for j in range(i+1, n):
+                for k in range(j+1, n):
+                    if no_du_nums[i] + no_du_nums[j] +no_du_nums[k] == 0:
+                        res.append([no_du_nums[i], no_du_nums[j], no_du_nums[k]])
+
+        return res
+
     # 官方题解
     def threeSum_1(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
@@ -72,8 +87,7 @@ class Solution:
         return ans
 
 
-
-
-
 if __name__ == '__main__':
     s = Solution()
+    nums = [0,0,-1,-1,1]
+    print(s.threeSum_0(nums))
