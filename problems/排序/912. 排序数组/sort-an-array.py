@@ -91,37 +91,109 @@ class Solution:
             self._merge(a, low, mid, high)
 
     ## 快速排序
-    def sortArray_QuickSort(self,nums: List[int]) -> List[int]:
+    # 采用这个算法了
+    # https://www.jianshu.com/p/2b2f1f79984e
+    def quick_Sort_11(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        def _quick_sort(left, right):
-            if left >= right:
-                return nums
-            pivot = left
-            i = left
-            j = right
-            while i < j:
-                while i < j and nums[j] > nums[pivot]:
-                    j -= 1
-                while i < j and nums[i] < nums[pivot]:
-                    i += 1
+        # 分区
+        def Partition(L, left, right):
+            pivotkey =L[left]
+            while left < right:
+                while left < right and L[right] >= pivotkey:
+                    right -= 1
+                L[left] = L[right]
+                while left < right and L[left] <= pivotkey:
+                    left += 1
+                L[right] = L[left]
+            L[left] = pivotkey
+            return left
 
-                nums[i], nums[j] = nums[j], nums[i]
-
-            nums[pivot], nums[j] = nums[pivot], nums[j]
-            # 此时的j就是pivot，也就是基准位
-            _quick_sort(left, j - 1)
-            _quick_sort(j + 1, right)
+        # 快排
+        def q_sort(nums, left, right):
+            if left < right:
+                pIndex = Partition(nums, left, right)
+                q_sort(nums, left, pIndex-1)
+                q_sort(nums, pIndex+1, right)
             return nums
 
-        return _quick_sort(0, n - 1)
+        return q_sort(nums, 0, n-1)
+
+    # 针对上一个快排的精简版
+    def sortArray_quick(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        def partition(left, right):
+            pivot_key = nums[left]
+            while left < right:
+                while left < right and nums[right] >= pivot_key:
+                    right -= 1
+                nums[left] = nums[right]
+                while left < right and nums[left] <= pivot_key:
+                    left += 1
+                nums[right] = nums[left]
+
+            nums[left] = pivot_key
+
+            return left
+
+        def quick_sort(left, right):
+            if left < right:
+                mid = partition(left, right)
+                quick_sort(left, mid - 1)
+                quick_sort(mid + 1, right)
+            else:
+                return
+
+        quick_sort(0, n - 1)
+        return nums
+
+    def sortArray_1(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+
+        def merge(low, mid, high):
+            i, j = low, mid + 1
+            tmp = []
+            while i <= mid and j <= high:
+                if nums[i] <= nums[j]:
+                    tmp.append(nums[i])
+                    i += 1
+                else:
+                    tmp.append(nums[j])
+                    j += 1
+
+            if i <= mid:
+                tmp.extend(nums[i:mid + 1])
+
+            if j <= high:
+                tmp.extend(nums[j:high + 1])
+
+            nums[low:high + 1] = tmp
+
+        def merge_sort(low, high):
+            if low < high:
+                #  mid = low + ((high-low)>>1)
+                mid = low + (high - low) // 2
+                merge_sort(low, mid)
+                merge_sort(mid + 1, high)
+                merge(low, mid, high)
+            else:
+                return
+        merge_sort(0, n - 1)
+        return nums
 
 
 if __name__ == '__main__':
     s = Solution()
-    nums = [5, 2, 3, 1]
-    print(s.sortArray(nums))
-    print(s.sortArray_bubleSort(nums))
-    print(s.sortArray_insertionSort(nums))
-    print(s.sortArray_SelectionSort(nums))
-    print(s.sortArray_MergeSort(nums))
-    print(s.sortArray_QuickSort(nums))
+    # nums = [51, 13, 76, 43, 26, 57, 23, 69]
+    # nums = [0]
+    # nums = [5, 1, 1, 2, 0, 0]
+    # nums = [4, 2, 1, 5, 6, 7, 11, 9]
+    nums = [0,1]
+    # print(s.sortArray(nums))
+    # print(s.sortArray(nums))
+    # print(s.sortArray_QuickSort(nums))
+    print(s.sortArray_333(nums))
+    # print(s.sortArray_bubleSort(nums))
+    # print(s.sortArray_insertionSort(nums))
+    # print(s.sortArray_SelectionSort(nums))
+    # print(s.sortArray_MergeSort(nums))
+    # print(s.sortArray_QuickSort(nums))

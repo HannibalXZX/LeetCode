@@ -3,7 +3,8 @@
 #@Author:    Shaw
 #@mail  :    shaw@bupt.edu.cn
 #@File  :    sorted-merge-lcci.py
-#@Description：
+#@Description：https://leetcode-cn.com/problems/merge-sorted-array/
+
 from typing import List
 
 class Solution:
@@ -31,8 +32,31 @@ class Solution:
                 tmp.append(B[j])
                 j += 1
 
+        # 细节 ，直接写成A=tmp是错误的
+        # 简单来讲a[:]是深复制，a是浅复制，相当于赋值a的话是赋值了指针，赋值a[:]相当于复制了a对应的那段空间
         A[:] = tmp
         return A
+
+    def merge_1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        tmp = []
+        i, j = 0, 0
+        while i < m and j < n:
+            if nums1[i] <= nums2[j]:
+                tmp.append(nums1[i])
+                i += 1
+
+            else:
+                tmp.append(nums2[j])
+                j += 1
+        if i < m:
+            tmp.extend(nums1[i:m])
+        if j < n:
+            tmp.extend(nums2[j:n])
+        nums1[:] = tmp
+        # return tmp
 
 if __name__ == '__main__':
     s = Solution()
@@ -40,4 +64,4 @@ if __name__ == '__main__':
     m = 3
     B = [2, 5, 6]
     n = 3
-    print(s.merge(A, m, B, n))
+    print(s.merge_1(A, m, B, n))

@@ -5,6 +5,9 @@
 # @File  :    binary-tree-level-order-traversal.py
 # @Description：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
 
+
+from typing import List
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -18,7 +21,8 @@ class Solution(object):
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         res = []
         def helper(root, depth):
-            if not root: return
+            if not root:
+                return
             if len(res) == depth:
                 res.append([])
             res[depth].append(root.val)

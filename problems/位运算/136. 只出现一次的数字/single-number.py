@@ -10,7 +10,6 @@ from typing import List
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-
         length = len(nums)
         if length == 0:
             return

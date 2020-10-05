@@ -28,7 +28,7 @@ class Solution(object):
         :rtype: TreeNode
         """
         self.count += 1
-
+        # 这里非要标记括弧！
         if not (preorder and inorder):
             return None
 
