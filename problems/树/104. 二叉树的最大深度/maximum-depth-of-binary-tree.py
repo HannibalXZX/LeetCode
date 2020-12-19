@@ -10,8 +10,8 @@ class TreeNode(object):
 
     def __init__(self, x):
         self.val = x
-        self.left = TreeNode
-        self.right = TreeNode
+        self.left = None
+        self.right = None
 
 class Solution(object):
 
